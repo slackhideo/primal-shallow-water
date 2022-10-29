@@ -482,8 +482,12 @@ function PNTwoHandedAnim() : bool {
 	 || thePlayer.PNanimType == "workbench"
 	 || thePlayer.PNanimType == "grindstone"
 	 || thePlayer.PNanimType == "pee"
-	 || thePlayer.PNanimType == "shallow"    //modPrimalShallowWater
-	 || thePlayer.PNanimType == "shallower"; //modPrimalShallowWater
+	//modPrimalShallowWater BEGIN
+	 || thePlayer.PNanimType == "shallow"
+	 || thePlayer.PNanimType == "shallower"
+	 || thePlayer.PNanimType == "bottle1"
+	 || thePlayer.PNanimType == "bottle2";
+	//modPrimalShallowWater END
 } 
  
 function PNIsAnim( anim : string ) : bool
