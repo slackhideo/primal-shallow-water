@@ -1,12 +1,3 @@
-/******************************************************************************/
-/** 	Primal Shallow Water for THE WITCHER 3: Wild Hunt
-/** 	© 2022 slackhideo
-/** 	Patch for the awesome Primal Needs by stefan3372
-/**
-/**		THE WITCHER® is a trademark of CD PROJEKT S. A.
-/** 	The Witcher game is based on the prose of Andrzej Sapkowski.
-/******************************************************************************/
-
 state PNAnimation in CR4Player
 {
 	private var prevState : name ;
@@ -72,8 +63,13 @@ state PNAnimation in CR4Player
 		}
 		if ( loop != '') {
 			speedMultID = parent.SetAnimationSpeedMultiplier( loopSpeed , speedMultID);
+			//modPrimalShallowWater BEGIN
 			do {
 				if (( anim == "shallow" || anim == "shallower" ) && PNGetThirst() <= 0 ) {
+					parent.PNSetLoop( false );
+					break;
+				}
+				if (( anim == "bottle1" || anim == "bottle2" ) && thePlayer.GetInventory().GetItemQuantityByName('Polluted Water') >= 10 ) {
 					parent.PNSetLoop( false );
 					break;
 				}
@@ -85,6 +81,9 @@ state PNAnimation in CR4Player
 					else 
 						PNDrinkShallow(PNGetThirst());
 				}
+				if ( anim == "bottle1" || anim == "bottle2" ) {
+					thePlayer.GetInventory().AddAnItem('Polluted Water');
+				}
 			} while ( parent.isLoop );
 			if ( anim == "shallow" || anim == "shallower" ) {
 				parent.RemoveTimer('InterruptMonitor');
@@ -92,6 +91,7 @@ state PNAnimation in CR4Player
 				if (PNPukeAnimOn() && i > PNGetShallowPukeLevel() )
 					parent.AddTimer('PNPuke', RandRangeF(30.0, 10.0));
 			}
+			//modPrimalShallowWater END
 		}
 		if ( stop != '' ) {
 			speedMultID = parent.SetAnimationSpeedMultiplier( stopSpeed , speedMultID);
@@ -185,12 +185,26 @@ state PNAnimation in CR4Player
 				stop = 'man_work_standing_splashing_his_face_stop'; stopSpeed = 1.0 ;
 				parent.isLoop = true;
 				break;
+			//modPrimalShallowWater BEGIN
 			case "shallower":
 				start = 'work_kneeling_start'; this.startSpeed = 1.0 ;
 				loop = 'work_kneeling_loop'; this.loopSpeed = 1.0 ;
 				stop = 'work_kneeling_end'; this.stopSpeed = 1.0 ;
 				parent.isLoop = true;
 				break;
+			case "bottle1":
+				start = 'man_work_standing_splashing_his_face_start'; this.startSpeed = 1.0 ;
+				loop = 'man_work_standing_splashing_his_face_loop_03'; this.loopSpeed = 1.0 ;
+				stop = 'man_work_standing_splashing_his_face_stop'; this.stopSpeed = 1.0 ;
+				parent.isLoop = true;
+				break;
+			case "bottle2":
+				start = 'work_kneeling_start'; this.startSpeed = 1.0 ;
+				loop = 'work_kneeling_loop'; this.loopSpeed = 1.0 ;
+				stop = 'work_kneeling_end'; this.stopSpeed = 1.0 ;
+				parent.isLoop = true;
+				break;
+			//modPrimalShallowWater END
 			case "puke":
 				pukesp = PNPukeSpeed();
 				start = '';
@@ -432,12 +446,31 @@ function PNShallowAnim() {
 		thePlayer.PNSetAnim("shallow");
 		PNSheatheSwordIfUnsheatedAndPlayAnimation();
 	}
+	//modPrimalShallowWater BEGIN
 	else if (thePlayer.IsInWaterTrigger() && PNAnimationNotBeingPerformed())
 	{
 		thePlayer.PNSetAnim("shallower");
 		PNSheatheSwordIfUnsheatedAndPlayAnimation();
 	}
+	//modPrimalShallowWater END
 }
+
+//modPrimalShallowWater BEGIN
+function PNBottleShallowWaterAnim()
+{
+	if (thePlayer.IsInShallowWater() && PNAnimationNotBeingPerformed())
+	{
+		thePlayer.PNSetAnim("bottle1");
+		PNSheatheSwordIfUnsheatedAndPlayAnimation();
+	}
+	else if (thePlayer.IsInWaterTrigger() && PNAnimationNotBeingPerformed())
+	{
+		thePlayer.PNSetAnim("bottle2");
+		PNSheatheSwordIfUnsheatedAndPlayAnimation();
+	}
+}
+//modPrimalShallowWater END
+
 /**************************************************************
 							HELPERS
  **************************************************************/
@@ -449,7 +482,8 @@ function PNTwoHandedAnim() : bool {
 	 || thePlayer.PNanimType == "workbench"
 	 || thePlayer.PNanimType == "grindstone"
 	 || thePlayer.PNanimType == "pee"
-	 || thePlayer.PNanimType == "shallow";
+	 || thePlayer.PNanimType == "shallow"    //modPrimalShallowWater
+	 || thePlayer.PNanimType == "shallower"; //modPrimalShallowWater
 } 
  
 function PNIsAnim( anim : string ) : bool

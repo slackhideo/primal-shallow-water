@@ -1,12 +1,3 @@
-/******************************************************************************/
-/** 	Primal Shallow Water for THE WITCHER 3: Wild Hunt
-/** 	© 2022 slackhideo
-/** 	Patch for the awesome Primal Needs by stefan3372
-/**
-/**		THE WITCHER® is a trademark of CD PROJEKT S. A.
-/** 	The Witcher game is based on the prose of Andrzej Sapkowski.
-/******************************************************************************/
-
 function PNRiseThirst( diff : int ) {
 	if ( diff > 1 ) {
 		if (!PNPeekMeditationFlag()) {
@@ -72,14 +63,8 @@ function PNDrinkShallow( drink : int ) {
 }
 
 function PNDrinkShallowWater() {
-	var pos	: Vector;
-	var isInWater : bool;
-
-	pos = thePlayer.GetWorldPosition();
-	isInWater = pos.Z <= theGame.GetWorld().GetWaterLevel(pos, true);
-
 	if ( PNThirstOn() ) {
-		if ( isInWater ) {
+		if ( PNIsInWater() ) { //modPrimalShallowWater
 			PNShallowAnim();
 		} else {
 			PNHudNotify( GetLocStringByKeyExt("HUDmessage_NoShallowWaterToDrink") );
