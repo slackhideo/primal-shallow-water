@@ -64,7 +64,7 @@ function PNDrinkShallow( drink : int ) {
 
 function PNDrinkShallowWater() {
 	if ( PNThirstOn() ) {
-		if ( PNIsInWater() ) { //modPrimalShallowWater
+		if ( PSWIsInWater() ) { //modPrimalShallowWater
 			PNShallowAnim();
 		} else {
 			PNHudNotify( GetLocStringByKeyExt("HUDmessage_NoShallowWaterToDrink") );

@@ -80,12 +80,7 @@ function PNUpdateToxicity(_inv : CInventoryComponent, itemId : SItemUniqueId) : 
 	}
 	if( itemTox > 0.f )
 	{
-		//modPrimalShallowWater BEGIN
-		if (_inv.GetItemName(itemId) == 'Polluted Water')
-			thePlayer.abilityManager.GainStat(BCS_Toxicity, PNGetShallowTox());
-		else
-		//modPrimalShallowWater END
-		if (_inv.ItemHasTag(itemId, 'Drinks')) {
+		if (_inv.ItemHasTag(itemId, 'Drinks') && _inv.GetItemName(itemId) != 'polluted_water') { //modPrimalShallowWater
 			thePlayer.abilityManager.DrainToxicity(itemTox * (-1));
 		} else {
 			thePlayer.abilityManager.GainStat(BCS_Toxicity, itemTox );

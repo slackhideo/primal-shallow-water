@@ -43,6 +43,13 @@ state PNAnimation in CR4Player
 		if ( wasUsingItem ) {	
 			parent.OnUseSelectedItem();
 		}
+
+		//modPrimalShallowWater BEGIN
+		if ( anim == "bottle1" || anim == "bottle2" )
+		{
+			PSWPutAwayBottle();
+		}
+		//modPrimalShallowWater END
 	}
 	
 	event OnTakeDamage(action: W3DamageAction)
@@ -69,7 +76,7 @@ state PNAnimation in CR4Player
 					parent.PNSetLoop( false );
 					break;
 				}
-				if (( anim == "bottle1" || anim == "bottle2" ) && thePlayer.GetInventory().GetItemQuantityByName('Polluted Water') >= 10 ) {
+				if (( anim == "bottle1" || anim == "bottle2" ) && parent.inv.GetItemQuantityByName('polluted_water') >= 10 ) {
 					parent.PNSetLoop( false );
 					break;
 				}
@@ -82,7 +89,7 @@ state PNAnimation in CR4Player
 						PNDrinkShallow(PNGetThirst());
 				}
 				if ( anim == "bottle1" || anim == "bottle2" ) {
-					thePlayer.GetInventory().AddAnItem('Polluted Water');
+					parent.inv.AddAnItem('polluted_water');
 				}
 			} while ( parent.isLoop );
 			if ( anim == "shallow" || anim == "shallower" ) {
@@ -452,25 +459,18 @@ function PNShallowAnim() {
 		thePlayer.PNSetAnim("shallower");
 		PNSheatheSwordIfUnsheatedAndPlayAnimation();
 	}
+	else
+	{
+		if ((thePlayer.PNanimType == "shallow")
+		 || (thePlayer.PNanimType == "shallower")
+		 || (thePlayer.PNanimType == "bottle1")
+		 || (thePlayer.PNanimType == "bottle2"))
+		{
+			thePlayer.PNSetLoop(false);
+		}
+	}
 	//modPrimalShallowWater END
 }
-
-//modPrimalShallowWater BEGIN
-function PNBottleShallowWaterAnim()
-{
-	if (thePlayer.IsInShallowWater() && PNAnimationNotBeingPerformed())
-	{
-		thePlayer.PNSetAnim("bottle1");
-		PNSheatheSwordIfUnsheatedAndPlayAnimation();
-	}
-	else if (thePlayer.IsInWaterTrigger() && PNAnimationNotBeingPerformed())
-	{
-		thePlayer.PNSetAnim("bottle2");
-		PNSheatheSwordIfUnsheatedAndPlayAnimation();
-	}
-}
-//modPrimalShallowWater END
-
 /**************************************************************
 							HELPERS
  **************************************************************/
