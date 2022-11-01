@@ -18,6 +18,15 @@ function PSWIsInWater() : bool
 	return pos.Z <= theGame.GetWorld().GetWaterLevel(pos, true);
 }
 
+/** Check if the player is drinking or bottling shallow water */
+function PSWIsShallowWaterShenanigans() : bool
+{
+	return (thePlayer.PNanimType == "shallow")
+	    || (thePlayer.PNanimType == "shallower")
+	    || (thePlayer.PNanimType == "bottle1")
+	    || (thePlayer.PNanimType == "bottle2");
+}
+
 /** Entry point of bottling shallow water */
 function PSWBottleShallowWater()
 {
@@ -49,15 +58,10 @@ function PSWBottleShallowWaterAnim()
 		thePlayer.PNSetAnim("bottle2");
 		PNSheatheSwordIfUnsheatedAndPlayAnimation();
 	}
-	else
+	/* Stop drinking or bottling shallow water */
+	else if (PSWIsShallowWaterShenanigans())
 	{
-		if ((thePlayer.PNanimType == "shallow")
-		 || (thePlayer.PNanimType == "shallower")
-		 || (thePlayer.PNanimType == "bottle1")
-		 || (thePlayer.PNanimType == "bottle2"))
-		{
-			thePlayer.PNSetLoop(false);
-		}
+		thePlayer.PNSetLoop(false);
 	}
 }
 

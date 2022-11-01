@@ -459,15 +459,10 @@ function PNShallowAnim() {
 		thePlayer.PNSetAnim("shallower");
 		PNSheatheSwordIfUnsheatedAndPlayAnimation();
 	}
-	else
+	/* Stop drinking or bottling shallow water */
+	else if (PSWIsShallowWaterShenanigans())
 	{
-		if ((thePlayer.PNanimType == "shallow")
-		 || (thePlayer.PNanimType == "shallower")
-		 || (thePlayer.PNanimType == "bottle1")
-		 || (thePlayer.PNanimType == "bottle2"))
-		{
-			thePlayer.PNSetLoop(false);
-		}
+		thePlayer.PNSetLoop(false);
 	}
 	//modPrimalShallowWater END
 }
@@ -482,12 +477,7 @@ function PNTwoHandedAnim() : bool {
 	 || thePlayer.PNanimType == "workbench"
 	 || thePlayer.PNanimType == "grindstone"
 	 || thePlayer.PNanimType == "pee"
-	//modPrimalShallowWater BEGIN
-	 || thePlayer.PNanimType == "shallow"
-	 || thePlayer.PNanimType == "shallower"
-	 || thePlayer.PNanimType == "bottle1"
-	 || thePlayer.PNanimType == "bottle2";
-	//modPrimalShallowWater END
+	 || PSWIsShallowWaterShenanigans(); //modPrimalShallowWater
 } 
  
 function PNIsAnim( anim : string ) : bool
