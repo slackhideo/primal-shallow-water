@@ -73,7 +73,13 @@ function PNUpdateToxicity(_inv : CInventoryComponent, itemId : SItemUniqueId) : 
 	itemTox = CalculateAttributeValue(_inv.GetItemAttributeValue(itemId, 'toxicity'));
 	currTox = thePlayer.GetStat(BCS_Toxicity);
 	maxTox = thePlayer.GetStatMax(BCS_Toxicity);
-	
+
+	//modPrimalShallowWater BEGIN
+	if (_inv.GetItemName(itemId) == 'polluted_water') {
+		itemTox = PNGetShallowTox();
+	}
+	//modPrimalShallowWater END
+
 	if ( currTox + itemTox > maxTox ) {
 		GetWitcherPlayer().PNSendToxicityTooHighMessage();
 		return false;
