@@ -68,24 +68,12 @@ function PSWBottleShallowWaterAnim()
 /** Set up bottle on left hand */
 function PSWSetUpBottle()
 {
-	var ids : array<SItemUniqueId>;
-
-	thePlayer.SetBehaviorVariable('SelectedItemL', (int)UI_Torch, true);
-	ids = thePlayer.inv.AddAnItem('mh107_czart_lure', 1, true);
-	thePlayer.inv.MountItem(ids[0], true);
-	thePlayer.RaiseEvent('ItemUseL');
+	thePlayer.AddTimer('PSWSetUpBottleTimer', 0.0f, false);
 }
 
 /** Put the bottle away after using it */
 function PSWPutAwayBottle()
 {
-	var ids : array<SItemUniqueId>;
-	var theOne : SItemUniqueId;
-
 	thePlayer.RaiseEvent('ItemUseL');
-	ids = thePlayer.inv.GetItemsByName('mh107_czart_lure');
-	theOne = ids[ids.Size() - 1];
-	thePlayer.inv.UnmountItem(theOne, true);
-	thePlayer.inv.RemoveItem(theOne, 1);
-	thePlayer.SetBehaviorVariable('SelectedItemL', (int)UI_None, true);
+	thePlayer.AddTimer('PSWPutAwayBottleTimer', 0.5f, false);
 }

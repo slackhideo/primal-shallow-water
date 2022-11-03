@@ -1902,9 +1902,30 @@ statemachine abstract import class CR4Player extends CPlayer
 	}
 	
 	//modPrimalShallowWater BEGIN
+	private var PSWBottle : SItemUniqueId;
+
 	timer function PSWBottleWaterTimer( deltaTime : float, id : int )
 	{
 		PSWBottleShallowWater();
+	}
+
+	timer function PSWSetUpBottleTimer( deltaTime : float, id : int )
+	{
+		var ids : array<SItemUniqueId>;
+		var bottle : name = 'mh107_czart_lure';
+
+		SetBehaviorVariable('SelectedItemL', (int)UI_Torch, true);
+		ids = inv.AddAnItem(bottle, 1, true);
+		this.PSWBottle = ids[0];
+		inv.MountItem(this.PSWBottle, true);
+		RaiseEvent('ItemUseL');
+	}
+
+	timer function PSWPutAwayBottleTimer( deltaTime : float, id : int )
+	{
+		theGame.GetGuiManager().ShowNotification("Put Away Bottle Timer");
+		inv.UnmountItem(this.PSWBottle, true);
+		inv.RemoveItem(this.PSWBottle, 1);
 	}
 	//modPrimalShallowWater END
 	
