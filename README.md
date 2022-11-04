@@ -1,6 +1,7 @@
 # Primal Shallow Water
 
-Enhancements for the shallow water drinking from Primal Needs.
+This is a mod for The Witcher 3: Wild Hunt containing my enhancements for the
+shallow water drinking from stefan3372's Primal Needs.
 
 To use this mod, you **must have
 [Primal Needs](https://www.nexusmods.com/witcher3/mods/2547)
@@ -31,9 +32,15 @@ an older version, please update it first.
    present in these water bodies in the context of the Third Nilfgaardian War.
    This means that drinking it will increase Geralt's toxicity level.
 
+   The amount of toxicity per bottle is the same value from each sip when
+   drinking directly from the "rivers" (thanks, Aeltoth!). This value is
+   configurable in Primal Needs' settings menu. The amount of thirst
+   replenishment per bottle is also the same value from each sip, and also
+   configurable.
+
    To fill up the bottles, press and hold the button to drink from shallow
-   water. You can do it under the same conditions of the previous bullet (i.e.,
-   in game's shallow water or in really shallow water).
+   water (thanks, wghost81!). You can do it under the same conditions of the
+   previous bullet (i.e., in game's shallow water or in really shallow water).
 
 1. In the original Primal Needs, the only way to stop drinking (as far as I
    know) is by pressing the jump button, which will abruptly interrupt the
@@ -45,3 +52,21 @@ an older version, please update it first.
 1. A new recipe was created to allow boiling (and thus, magically purifying) the
    bottled polluted water to remove toxicity. The resulting item is Canteen
    Water, the same one from the original Primal Needs.
+
+   You can buy the recipe only from the Crow's Perch's trader, to be consistent
+   with [What's For Dinner](https://www.nexusmods.com/witcher3/mods/488),
+   included in Primal Needs.
+
+## Acknowledgements
+
+* [CD PROJEKT RED](https://cdprojektred.com) for this great game series.
+* [stefan3372](https://www.nexusmods.com/witcher3/users/42512255) for the
+amazing Primal Needs.
+* [wghost81](https://www.nexusmods.com/witcher3/users/905332) for permitting me
+to use her logic to hold a button to perform a different action. Based on the
+superb [Friendly HUD](https://www.nexusmods.com/witcher3/mods/365).
+* [Aeltoth](https://www.nexusmods.com/witcher3/users/89683013) for helping me in
+processing toxicity.
+* [MerseyRockoff](https://www.nexusmods.com/witcher3/users/56064207) and
+[paulr0013](https://www.nexusmods.com/witcher3/users/92248218) for helping me
+find help.
