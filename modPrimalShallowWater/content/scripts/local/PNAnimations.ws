@@ -45,8 +45,7 @@ state PNAnimation in CR4Player
 		}
 
 		//modPrimalShallowWater BEGIN
-		if ( anim == "bottle1" || anim == "bottle2" )
-		{
+		if ( anim == "bottle1" || anim == "bottle2" ) {
 			PSWPutAwayBottle();
 		}
 		//modPrimalShallowWater END
@@ -64,13 +63,18 @@ state PNAnimation in CR4Player
 	entry function PlayAnimation()
 	{
 		var i : int; i = 0;
+		//modPrimalShallowWater BEGIN
 		if ( start != '' ) {
-			speedMultID = parent.SetAnimationSpeedMultiplier( startSpeed , speedMultID);
-			parent.ActionPlaySlotAnimation( 'PLAYER_SLOT', start, 1.0, 0.0 );
+			if (this.wasSwimming()) {
+				parent.BlockAction(EIAB_Movement, 'Animation');
+				parent.RaiseEvent('DiveFail');
+			} else {
+				speedMultID = parent.SetAnimationSpeedMultiplier( startSpeed , speedMultID);
+				parent.ActionPlaySlotAnimation( 'PLAYER_SLOT', start, 1.0, 0.0 );
+			}
 		}
 		if ( loop != '') {
 			speedMultID = parent.SetAnimationSpeedMultiplier( loopSpeed , speedMultID);
-			//modPrimalShallowWater BEGIN
 			do {
 				if (( anim == "shallow" || anim == "shallower" ) && PNGetThirst() <= 0 ) {
 					parent.PNSetLoop( false );
@@ -80,7 +84,11 @@ state PNAnimation in CR4Player
 					parent.PNSetLoop( false );
 					break;
 				}
-				parent.ActionPlaySlotAnimation( 'PLAYER_SLOT', loop );
+				if (this.wasSwimming()) {
+					Sleep(5.0f);
+				} else {
+					parent.ActionPlaySlotAnimation( 'PLAYER_SLOT', loop , 0.0, 0.0);
+				}
 				if ( anim == "shallow" || anim == "shallower" ) {
 					i += 1;
 					if (PNGetThirst() >= PNGetShallowThirstRise() )
@@ -98,12 +106,17 @@ state PNAnimation in CR4Player
 				if (PNPukeAnimOn() && i > PNGetShallowPukeLevel() )
 					parent.AddTimer('PNPuke', RandRangeF(30.0, 10.0));
 			}
-			//modPrimalShallowWater END
 		}
 		if ( stop != '' ) {
-			speedMultID = parent.SetAnimationSpeedMultiplier( stopSpeed , speedMultID);
-			parent.ActionPlaySlotAnimation( 'PLAYER_SLOT', stop , 1.0, 1.0);
+			if (this.wasSwimming()) {
+				parent.RaiseEvent('DiveFail');
+				parent.UnblockAction(EIAB_Movement, 'Animation');
+			} else {
+				speedMultID = parent.SetAnimationSpeedMultiplier( stopSpeed , speedMultID);
+				parent.ActionPlaySlotAnimation( 'PLAYER_SLOT', stop , 0.0, 1.0);
+			}
 		}
+		//modPrimalShallowWater END
 		if ( anim == "grindstone" || anim == "oil") 
 			PNSheatheSword();
 			
@@ -243,6 +256,11 @@ state PNAnimation in CR4Player
 			default:
 				break;
 		}
+	}
+	
+	function wasSwimming() : bool
+	{
+		return this.prevState == 'Swimming';
 	}
 }
 
