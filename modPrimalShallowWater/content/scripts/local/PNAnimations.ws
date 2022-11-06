@@ -481,6 +481,7 @@ function PNShallowAnim() {
 	else if (PSWIsShallowWaterShenanigans())
 	{
 		thePlayer.PNSetLoop(false);
+		PNHudNotify(GetLocStringByKeyExt("psw_anim_stopping"));
 	}
 	//modPrimalShallowWater END
 }

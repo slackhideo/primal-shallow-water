@@ -62,6 +62,7 @@ function PSWBottleShallowWaterAnim()
 	else if (PSWIsShallowWaterShenanigans())
 	{
 		thePlayer.PNSetLoop(false);
+		PNHudNotify(GetLocStringByKeyExt("psw_anim_stopping"));
 	}
 }
 
