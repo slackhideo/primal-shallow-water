@@ -2765,6 +2765,28 @@ import class CInventoryComponent extends CComponent
 		}
 		
 		//modPrimalShallowWater BEGIN
+		// PN
+		// if ( IsItemFood(potionId) ) {
+		// 	newAttr.originName = 'expire';
+		// 	newAttr.attributeName = GetLocStringByKeyExt("ToolTip_Expiration");
+		// 	newAttr.value = PNGetExpireLevel( this , potionId );
+		// 	newAttr.percentageValue = false ;
+		// 	if ( newAttr.value != 0.0 ) tips.PushBack(newAttr);
+		// 	
+		// 	newAttr.originName = 'feed';
+		// 	newAttr.attributeName = GetLocStringByKeyExt("ToolTip_Hunger");
+		// 	newAttr.value = (float) PNGetFeedLevel( this , potionId ) / 100.0 ;
+		// 	newAttr.percentageValue = true ;
+		// 	if ( newAttr.value != 0.0 ) tips.PushBack(newAttr);
+		// 	
+		// 	newAttr.originName = 'drink';
+		// 	newAttr.attributeName = GetLocStringByKeyExt("ToolTip_Thirst");
+		// 	newAttr.value = (float) PNGetDrinkLevel( this , potionId ) / 100.0 ;
+		// 	newAttr.percentageValue = true ;
+		// 	if ( newAttr.value != 0.0 ) tips.PushBack(newAttr);
+		// }
+		// PN
+		
 		if (GetItemName(potionId) == 'polluted_water')
 		{
 			/* Toxicity */
@@ -2783,6 +2805,28 @@ import class CInventoryComponent extends CComponent
 		}
 		else
 		//modPrimalShallowWater END
+		
+		// PN
+		if ( IsItemFood(potionId) ) {
+			newAttr.originName = 'expire';
+			newAttr.attributeName = GetLocStringByKeyExt("ToolTip_Expiration");
+			newAttr.value = PNGetExpireLevel( this , potionId );
+			newAttr.percentageValue = false ;
+			if ( newAttr.value != 0.0 ) tips.PushBack(newAttr);
+			
+			newAttr.originName = 'feed';
+			newAttr.attributeName = GetLocStringByKeyExt("ToolTip_Hunger");
+			newAttr.value = (float) PNGetFeedLevel( this , potionId ) / 100.0 ;
+			newAttr.percentageValue = true ;
+			if ( newAttr.value != 0.0 ) tips.PushBack(newAttr);
+			
+			newAttr.originName = 'drink';
+			newAttr.attributeName = GetLocStringByKeyExt("ToolTip_Thirst");
+			newAttr.value = (float) PNGetDrinkLevel( this , potionId ) / 100.0 ;
+			newAttr.percentageValue = true ;
+			if ( newAttr.value != 0.0 ) tips.PushBack(newAttr);
+		}
+		// PN
 	}
 	
 	

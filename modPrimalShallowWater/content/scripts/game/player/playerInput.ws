@@ -993,7 +993,44 @@ class CPlayerInput
 		}
 	}
 	
+	// PN
+	event OnPNToggleHud( action : SInputAction ) {
+		if( IsReleased(action) ) {
+			PNToggleHud();
+			PNUpdateHud();
+		}
+	}
+	
+	event OnPNPee( action : SInputAction) {
+		if( IsReleased(action) ) {
+			if (PNPeeOn()) {
+				if (PNGetPee() > 4)
+					PNPee();
+				else 
+					PNHudNotify( GetLocStringByKeyExt("HUDmessage_NotAbleToPee") );
+			}
+		}
+	}
+	
+	event OnPNPoop( action : SInputAction) {
+		if( IsReleased(action) ) {
+			if (PNPoopOn()) {
+				if (PNGetPoop() > 9)
+					PNPoop();
+				else 
+					PNHudNotify( GetLocStringByKeyExt("HUDmessage_NotAbleToPoop") );
+			}
+		}
+	}
+	
 	//modPrimalShallowWater BEGIN
+	//event OnPNDrinkShallowWater( action : SInputAction ) {
+	//	if ( IsReleased( action )) {
+	//		PNDrinkShallowWater();		
+	//	}
+	//}	
+	// PN
+	
 	private var pressPSWDrinkShallowWaterTime : float;
 	event OnPNDrinkShallowWater( action : SInputAction ) {
 		if (IsPressed(action))
