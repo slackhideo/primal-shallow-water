@@ -62,15 +62,26 @@ state PNAnimation in CR4Player
 	
 	entry function PlayAnimation()
 	{
-		var i : int; i = 0;
-		//modPrimalShallowWater BEGIN
+		//PN + modPrimalShallowWater BEGIN
+		var i : int = 0;
+		var blendIn  : float = 1.0;
+		var blendOut : float = 0.0;
+
+		if (this.anim == "shallower") {
+			blendIn  = 0.3f;
+			blendOut = 0.3f;
+		} else if (this.anim == "bottle2") {
+			blendIn  = 0.9f;
+			blendOut = 0.9f;
+		}
+
 		if ( start != '' ) {
 			if (this.wasSwimming()) {
 				parent.BlockAction(EIAB_Movement, 'Animation');
 				parent.RaiseEvent('DiveFail');
 			} else {
 				speedMultID = parent.SetAnimationSpeedMultiplier( startSpeed , speedMultID);
-				parent.ActionPlaySlotAnimation( 'PLAYER_SLOT', start, 1.0, 0.0 );
+				parent.ActionPlaySlotAnimation( 'PLAYER_SLOT', start, 1.0, blendOut );
 			}
 		}
 		if ( loop != '') {
@@ -87,7 +98,11 @@ state PNAnimation in CR4Player
 				if (this.wasSwimming()) {
 					Sleep(5.0f);
 				} else {
-					parent.ActionPlaySlotAnimation( 'PLAYER_SLOT', loop , 0.0, 0.0);
+					if (this.anim == "bottle2") {
+						parent.ActionPlaySlotAnimation( 'PLAYER_SLOT', loop , blendIn, blendOut);
+					} else {
+						parent.ActionPlaySlotAnimation( 'PLAYER_SLOT', loop , 0.0, 0.0);
+					}
 				}
 				if ( anim == "shallow" || anim == "shallower" ) {
 					i += 1;
@@ -113,10 +128,10 @@ state PNAnimation in CR4Player
 				parent.UnblockAction(EIAB_Movement, 'Animation');
 			} else {
 				speedMultID = parent.SetAnimationSpeedMultiplier( stopSpeed , speedMultID);
-				parent.ActionPlaySlotAnimation( 'PLAYER_SLOT', stop , 0.0, 1.0);
+				parent.ActionPlaySlotAnimation( 'PLAYER_SLOT', stop , blendIn, 1.0);
 			}
 		}
-		//modPrimalShallowWater END
+		//PN + modPrimalShallowWater END
 		if ( anim == "grindstone" || anim == "oil") 
 			PNSheatheSword();
 			
@@ -207,21 +222,21 @@ state PNAnimation in CR4Player
 				break;
 			//modPrimalShallowWater BEGIN
 			case "shallower":
-				start = 'work_kneeling_start'; this.startSpeed = 1.0 ;
-				loop = 'work_kneeling_loop'; this.loopSpeed = 1.0 ;
-				stop = 'work_kneeling_end'; this.stopSpeed = 1.0 ;
+				start = 'man_work_milking_cow_start'; this.startSpeed = 1.0f;
+				loop  = 'man_work_milking_cow_loop2'; this.loopSpeed  = 1.0f;
+				stop  = 'man_work_loot_ground_stop';  this.stopSpeed  = 1.0f;
 				parent.isLoop = true;
 				break;
 			case "bottle1":
-				start = 'man_work_standing_splashing_his_face_start'; this.startSpeed = 1.0 ;
-				loop = 'man_work_standing_splashing_his_face_loop_03'; this.loopSpeed = 1.0 ;
-				stop = 'man_work_standing_splashing_his_face_stop'; this.stopSpeed = 1.0 ;
+				start = 'man_work_standing_splashing_his_face_start';   this.startSpeed = 1.0f;
+				loop  = 'man_work_standing_splashing_his_face_loop_03'; this.loopSpeed  = 1.0f;
+				stop  = 'man_work_standing_splashing_his_face_stop';    this.stopSpeed  = 1.0f;
 				parent.isLoop = true;
 				break;
 			case "bottle2":
-				start = 'work_kneeling_start'; this.startSpeed = 1.0 ;
-				loop = 'work_kneeling_loop'; this.loopSpeed = 1.0 ;
-				stop = 'work_kneeling_end'; this.stopSpeed = 1.0 ;
+				start = 'work_kneeling_start';                   this.startSpeed = 1.0f;
+				loop  = 'high_kneeling_determined_gesture_take'; this.loopSpeed  = 1.0f;
+				stop  = 'work_kneeling_end';                     this.stopSpeed  = 1.0f;
 				parent.isLoop = true;
 				break;
 			//modPrimalShallowWater END
@@ -257,11 +272,13 @@ state PNAnimation in CR4Player
 				break;
 		}
 	}
-	
+
+	//modPrimalShallowWater BEGIN
 	function wasSwimming() : bool
 	{
 		return this.prevState == 'Swimming';
 	}
+	//modPrimalShallowWater END
 }
 
 state PNInterruption in CR4Player
