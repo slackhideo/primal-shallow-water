@@ -5,8 +5,8 @@ shallow water drinking from stefan3372's Primal Needs.
 
 To use this mod, you **must have
 [Primal Needs](https://www.nexusmods.com/witcher3/mods/2547)
-installed**. This mod was tested with Primal Needs version 1.15.1. If you have
-an older version, please update it first.
+installed**. This mod was tested with Primal Needs version **1.15.1**. If you
+have an older version, please update it first.
 
 ## Features Rundown
 
@@ -34,14 +34,16 @@ an older version, please update it first.
    This means that drinking it will increase Geralt's toxicity level.
 
    The amount of toxicity per bottle is the same value from each sip when
-   drinking directly from the "rivers" (thanks, Aeltoth!). This value is
-   configurable in Primal Needs' settings menu. The amount of thirst
+   drinking directly from the "rivers" (thanks,
+   [Aeltoth](https://www.nexusmods.com/witcher3/users/89683013)!). This value
+   is configurable in Primal Needs' settings menu. The amount of thirst
    replenishment per bottle is also the same value from each sip, and also
    configurable.
 
    To fill up the bottles, press and hold the button to drink from shallow
-   water (thanks, wghost81!). You can do it under the same conditions of the
-   previous bullet (i.e., in game's shallow water or in really shallow water).
+   water (thanks, [wghost81](https://www.nexusmods.com/witcher3/users/905332)!).
+   You can do it under the same conditions of the previous bullet (i.e., in
+   game's shallow water or in really shallow water).
 
 1. In the original Primal Needs, the only way to stop drinking (as far as I
    know) is by pressing the jump button, which will abruptly interrupt the
@@ -54,7 +56,7 @@ an older version, please update it first.
    take some seconds for it to stop, one could think the stopping button didn't
    work. For this reason, I added a feedback message ("Stopping...") in the
    game's HUD. If you wish to play without this message, comment out the lines
-   501 of `/content/scripts/local/PNAnimations.ws` and 65 of
+   520 of `/content/scripts/local/PNAnimations.ws` and 65 of
    `/content/scripts/local/PSWShallowWater.ws`. The command to print the
    message is this:
 
@@ -84,6 +86,20 @@ an older version, please update it first.
    move (except for changing direction, for magical reasons), as is the case
    when drinking or bottling shallow water with proper animations.
 
+## New Behaviour
+
+I strived to keep the behaviour of other parts of Primal Needs untouched, but
+I found two bugs that detract from our cherished immersion. The first one is
+that you cannot eat or drink when under puking effect (intended behaviour) but
+the animations play out the same. The second one is that you can drink shallow
+water even when under puking effect.
+
+So I tried to fix these bugs to increse immersion. Now, if you try to eat or
+drink ("river" water included), Geralt will puke and the relevant message from
+Primal Needs will appear in the game's HUD. The rationale for the puking is
+that Geralt is nauseated when under puking effect, so if he tries to eat or
+drink anything in this condition, he will feel the urge to puke again.
+
 ## Changed Files
 
 <details>
@@ -91,19 +107,19 @@ an older version, please update it first.
 From vanilla game:
 
 ```
-/content/scripts/game/components/inventoryComponent.ws
-/content/scripts/game/player/states/swimming.ws
-/content/scripts/game/player/playerInput.ws
-/content/scripts/game/player/r4Player.ws
+scripts/game/components/inventoryComponent.ws
+scripts/game/player/states/swimming.ws
+scripts/game/player/playerInput.ws
+scripts/game/player/r4Player.ws
 ```
 
 From Primal Needs:
 
 ```
-/content/scripts/local/PNAnimations.ws
-/content/scripts/local/PNData.ws
-/content/scripts/local/PNFood.ws
-/content/scripts/local/PNThirst.ws
+scripts/local/PNAnimations.ws
+scripts/local/PNData.ws
+scripts/local/PNFood.ws
+scripts/local/PNThirst.ws
 ```
 
 </details>
@@ -136,16 +152,16 @@ Merger](https://www.nexusmods.com/witcher3/mods/484) for this.
 
 You should be presented with the following unsolved conflicts:
 
-* `/content/scripts/game/components/inventoryComponent.ws`: Choose the version
-  from `modPrimalShallowWater`. It will be in the C panel, probably.
-* `/content/scripts/game/player/playerInput.ws`: Idem.
-* `/content/scripts/local/PNAnimations.ws`: From Script Merger's menus, select
+* `scripts/game/components/inventoryComponent.ws`: Choose the version from
+  `modPrimalShallowWater`. It will be in the C panel, probably.
+* `scripts/game/player/playerInput.ws`: Idem.
+* `scripts/local/PNAnimations.ws`: From Script Merger's menus, select
   **Merge** -> **Choose B for All Unsolved Conflicts**, assuming 
   `modPrimalShallowWater` is being displayed in the B panel. If not, replace
   "B" with the appropriate letter.
-* `/content/scripts/local/PNData.ws`: Idem.
-* `/content/scripts/local/PNFood.ws`: Idem.
-* `/content/scripts/local/PNThirst.ws`: Idem.
+* `scripts/local/PNData.ws`: Idem.
+* `scripts/local/PNFood.ws`: Idem.
+* `scripts/local/PNThirst.ws`: Idem.
 
 ## Uninstallation
 
@@ -188,7 +204,13 @@ may want to change the encoding of the scripts to UTF-16. You can use the
 `modPrimalShallowWater/convert_encoding.sh` shell script to do so, by simply
 executing it.
 
+## Mod Page on Nexus
+
+[https://www.nexusmods.com/witcher3/mods/7071](https://www.nexusmods.com/witcher3/mods/7071)
+
 ## Acknowledgements
+
+Standing on the shoulders of these giants:
 
 * [CD PROJEKT RED](https://cdprojektred.com) for this great game series.
 * [stefan3372](https://www.nexusmods.com/witcher3/users/42512255) for the
