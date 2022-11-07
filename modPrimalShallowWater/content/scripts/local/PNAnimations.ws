@@ -231,9 +231,9 @@ state PNAnimation in CR4Player
 				break;
 			//modPrimalShallowWater BEGIN
 			case "shallower":
-				start = 'man_work_milking_cow_start'; this.startSpeed = 1.0f;
-				loop  = 'man_work_milking_cow_loop2'; this.loopSpeed  = 1.0f;
-				stop  = 'man_work_loot_ground_stop';  this.stopSpeed  = 1.0f;
+				start = 'man_work_milking_cow_start'; this.startSpeed = 0.9f;
+				loop  = 'man_work_milking_cow_loop2'; this.loopSpeed  = 0.7f;
+				stop  = 'man_work_loot_ground_stop';  this.stopSpeed  = 0.9f;
 				parent.isLoop = true;
 				break;
 			case "bottle1":
@@ -243,9 +243,9 @@ state PNAnimation in CR4Player
 				parent.isLoop = true;
 				break;
 			case "bottle2":
-				start = 'work_kneeling_start';                   this.startSpeed = 1.0f;
-				loop  = 'high_kneeling_determined_gesture_take'; this.loopSpeed  = 1.0f;
-				stop  = 'work_kneeling_end';                     this.stopSpeed  = 1.0f;
+				start = 'work_kneeling_start';                   this.startSpeed = 0.9f;
+				loop  = 'high_kneeling_determined_gesture_take'; this.loopSpeed  = 0.8f;
+				stop  = 'work_kneeling_end';                     this.stopSpeed  = 0.9f;
 				parent.isLoop = true;
 				break;
 			//modPrimalShallowWater END
