@@ -22,7 +22,16 @@ state PNAnimation in CR4Player
 		parent.BlockAction( EIAB_DrawWeapon, 'Animation' );
 		prevState = prevStateName;
 		parent.prevState = prevStateName;
-		anim = parent.PNanimType;
+
+		//modPrimalShallowWater BEGIN
+		if (parent.PukeEffect && this.IsFoodAnim()) {
+			PNHudNotify(GetLocStringByKeyExt("HUDmessage_PukingEffect"));
+			this.anim = "puke";
+		} else {
+			this.anim = parent.PNanimType;
+		}
+		//modPrimalShallowWater END
+
 		if (GetWitcherPlayer().IsCurrentlyUsingItemL() && PNTwoHandedAnim() ) {
 			parent.OnUseSelectedItem();
 			wasUsingItem = true;
@@ -76,7 +85,7 @@ state PNAnimation in CR4Player
 		}
 
 		if ( start != '' ) {
-			if (this.wasSwimming()) {
+			if (this.WasSwimming()) {
 				parent.BlockAction(EIAB_Movement, 'Animation');
 				parent.RaiseEvent('DiveFail');
 			} else {
@@ -95,7 +104,7 @@ state PNAnimation in CR4Player
 					parent.PNSetLoop( false );
 					break;
 				}
-				if (this.wasSwimming()) {
+				if (this.WasSwimming()) {
 					Sleep(5.0f);
 				} else {
 					if (this.anim == "bottle2") {
@@ -123,7 +132,7 @@ state PNAnimation in CR4Player
 			}
 		}
 		if ( stop != '' ) {
-			if (this.wasSwimming()) {
+			if (this.WasSwimming()) {
 				parent.RaiseEvent('DiveFail');
 				parent.UnblockAction(EIAB_Movement, 'Animation');
 			} else {
@@ -274,9 +283,19 @@ state PNAnimation in CR4Player
 	}
 
 	//modPrimalShallowWater BEGIN
-	function wasSwimming() : bool
+	private function WasSwimming() : bool
 	{
 		return this.prevState == 'Swimming';
+	}
+
+	private function IsFoodAnim() : bool
+	{
+		return (parent.PNanimType == "drink")
+		    || (parent.PNanimType == "drink2")
+		    || (parent.PNanimType == "eat")
+		    || (parent.PNanimType == "eat2")
+		    || (parent.PNanimType == "shallow")
+		    || (parent.PNanimType == "shallower");
 	}
 	//modPrimalShallowWater END
 }
