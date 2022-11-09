@@ -1,0 +1,118 @@
+[heading][center]Primal Shallow Water[/center][/heading]
+
+[center]Enhancements for the shallow water drinking from Primal Needs.[/center]
+
+To use this mod, you [b]must have [url=https://www.nexusmods.com/witcher3/mods/2547]Primal Needs[/url] installed[/b]. This mod was tested with Primal Needs version [b]1.15.1[/b]. If you have an older version, please update it first.
+
+[size=4][color=#E6832B][b]Features Rundown[/b][/color][/size]
+
+[color=#BF4848][b]1.[/b][/color] Drink from really shallow water.
+[color=#BF4848][b]2.[/b][/color] Bottle shallow water to drink later.
+[color=#BF4848][b]3.[/b][/color] Stop the animations for the above actions gracefully.
+[color=#BF4848][b]4.[/b][/color] Purify bottled shallow water to remove toxicity.
+[color=#BF4848][b]5.[/b][/color] [Extra] Drink and bottle [s]shallow[/s] water while swimming.
+
+[size=4][color=#E6832B][b]Features Explanation[/b][/color][/size]
+
+[color=#BF4848][b]1.[/b][/color] In the original Primal Needs, you can only drink "river" (or ocean, lake, etc.) water from places where the game considers to be "shallow water". But that is not quite shallow, actually. It starts at about Geralt's waist level and end when he starts swimming.
+
+This mod relax this condition and makes it possible to drink from really shallow water. In fact, as long as Geralt is in water (and not swimming), he can drink water. This new possibility comes with a different animation as well, to reflect the lower water level.
+
+[color=#BF4848][b]2.[/b][/color] Now you can fill up to 10 bottles using "river" water to drink later. As is the case when drinking directly, this water is polluted due to corpses being present in these water bodies in the context of the Third Nilfgaardian War. This means that drinking it will increase Geralt's toxicity level.
+
+The amount of toxicity per bottle is the same value from each sip when drinking directly from the "rivers" (thanks, [url=https://www.nexusmods.com/witcher3/users/89683013]Aeltoth[/url]!). This value is configurable in Primal Needs' settings menu. The amount of thirst replenishment per bottle is also the same value from each sip, and also configurable.
+
+To fill up the bottles, press and hold the button to drink from shallow water (thanks, [url=https://www.nexusmods.com/witcher3/users/905332]wghost81[/url]!). You can do it under the same conditions of the previous bullet (i.e., in game's shallow water or in really shallow water).
+
+[color=#BF4848][b]3.[/b][/color] In the original Primal Needs, the only way to stop drinking (as far as I know) is by pressing the jump button, which will abruptly interrupt the action. This behaviour is kept, but now you can also stop drinking or bottling water by pressing the drink button (i.e., the same button you pressed to start the action). This will stop the animation after the current loop iteration is finished, and correctly play the stopping animation.
+
+Since, depending on the animation frame when you press the button, it could take some seconds for it to stop, one could think the stopping button didn't work. For this reason, I added a feedback message ("Stopping...") in the game's HUD. If you wish to play without this message, comment out the lines 520 of [code]/content/scripts/local/PNAnimations.ws[/code] and 65 of [code]/content/scripts/local/PSWShallowWater.ws[/code]. The command to print the message is this:
+
+[code]PNHudNotify(GetLocStringByKeyExt("psw_anim_stopping"));[/code]
+
+[color=#BF4848][b]4.[/b][/color] A new recipe was created to allow boiling (and thus, magically purifying) the bottled polluted water to remove toxicity. The resulting item is Canteen Water, the same one from the original Primal Needs.
+
+You can buy the recipe only from the Crow's Perch's trader, to be consistent with [url=https://www.nexusmods.com/witcher3/mods/488]What's For Dinner[/url], included in Primal Needs.
+
+[color=#BF4848][b]5.[/b][/color] [Extra] Okay, this one is definitely not "shallow water", but hear me out. I've always found strange that we can't drink from "rivers" when swimming. Well, while making this mod I might have stumbled upon the answer: we cannot play those nice animations while swimming. But that didn't prevent me from adding the ability to drink and bottle [s]shallow[/s] water while swimming.
+
+To make up for the lack of animations, I used the pseudo-animation of trying to dive when the water level is too low (you will understand when you see). This pseudo-animation plays when you start the action and also when it finishes or you ask nicely for it to stop (see feature number 3), to let you know it finished. While drinking or bottling [s]shallow[/s] water, you cannot move (except for changing direction, for magical reasons), as is the case when drinking or bottling shallow water with proper animations.
+
+[size=4][color=#E6832B][b]New Behaviour[/b][/color][/size]
+
+I strived to keep the behaviour of other parts of Primal Needs untouched, but I found two bugs that detract from our cherished immersion. The first one is that you cannot eat or drink when under puking effect (intended behaviour) but the animations play out the same. The second one is that you can drink shallow water even when under puking effect.
+
+So I tried to fix these bugs to increase immersion. Now, if you try to eat or drink ("river" water included), Geralt will puke and the relevant message from Primal Needs will appear in the game's HUD. The rationale for the puking is that Geralt is nauseated when under puking effect, so if he tries to eat or drink anything in this condition, he will feel the urge to puke again.
+
+[size=4][color=#E6832B][b]List of Changed Files[/b][/color][/size]
+
+[spoiler]From vanilla game:
+[code]
+scripts/game/components/inventoryComponent.ws
+scripts/game/player/states/swimming.ws
+scripts/game/player/playerInput.ws
+scripts/game/player/r4Player.ws
+[/code]
+From Primal Needs:
+[code]
+scripts/local/PNAnimations.ws
+scripts/local/PNData.ws
+scripts/local/PNFood.ws
+scripts/local/PNThirst.ws
+[/code][/spoiler]
+
+[size=4][color=#E6832B][b]Installation[/b][/color][/size]
+
+I split the installation in two parts. Please, read them carefully.
+
+[size=3][color=#E6832B]Part 1: Copying the mod files[/color][/size]
+
+To copy the mod files to your game folder, you have basically two options:
+
+[b]Manual method[/b]: Extract the contents of the 7z file. Then copy (or cut) the [code]modPrimalShallowWater[/code] folder and paste it into the [code]mods[/code] folder inside your game's folder structure. It should be in the same folder as the [code]modPrimalNeeds[/code] folder. Also, copy (or cut) the [code]dlcPrimalShallowWater[/code] folder and paste it into the [code]dlc[/code] folder inside your game's folder structure.
+
+[b]OR[/b]
+
+[b]Automatic method[/b]: Use [url=https://www.nexusmods.com/witcher3/mods/2678]The Witcher 3 Mod Manager[/url]. I did not test using Vortex.
+
+[size=3][color=#E6832B]Part 2: Merging the mod files[/color][/size]
+
+After copying the mod files, you [b]must[/b] merge them with other mods, especially with Primal Needs. Use the [url=https://www.nexusmods.com/witcher3/mods/484]Script Merger[/url] for this.
+
+You should be presented with the following unsolved conflicts:
+
+[list]
+[*] [code]game/components/inventoryComponent.ws[/code]: Choose the version from [code]modPrimalShallowWater[/code]. It will be in the C panel, probably.
+[*] [code]game/player/playerInput.ws[/code]: Idem.
+[*] [code]local/PNAnimations.ws[/code]: From Script Merger's menus, select [b]Merge[/b] -> [b]Choose B for All Unsolved Conflicts[/b], assuming [code]modPrimalShallowWater[/code] is being displayed in the B panel. If not, replace "B" with the appropriate letter*.
+[*] [code]local/PNData.ws[/code]: Idem.
+[*] [code]local/PNFood.ws[/code]: Idem.
+[*] [code]local/PNThirst.ws[/code]: Idem.
+[/list]
+* This instruction assumes that you have unmodified Primal Needs' scripts. If you have a mod that changed them or you have made some change yourself, then you should go through each conflict, solving them one by one lest you break the relevant mods.
+
+I made a video-tutorial on how to merge the mod files. You can watch it below.
+
+[center][youtube]S6ifNODUXo4[/youtube][/center]
+
+[size=4][color=#E6832B][b]Uninstallation[/b][/color][/size]
+
+If you installed manually, remove the [code]modPrimalShallowWater[/code] folder from your [code]mods[/code] folder and remove the [code]dlcPrimalShallowWater[/code] folder from your [code]dlc[/code] folder. Then, run Script Merger to update your merged files.
+
+If you installed with The Witcher 3 Mod Manager, use it to remove the mod and run Script Merger to update your merged files.
+
+[size=4][color=#E6832B][b]Source Code[/b][/color][/size]
+
+You can check out the source code of the mod on this [url=https://github.com/slackhideo/primal-shallow-water]GitHub repository[/url].
+
+[size=4][color=#E6832B][b]Acknowledgements[/b][/color][/size]
+
+Standing on the shoulders of these giants:
+
+[list]
+[*] [url=https://cdprojektred.com]CD PROJEKT RED[/url] for this great game series.
+[*] [url=https://www.nexusmods.com/witcher3/users/42512255]stefan3372[/url] for the amazing Primal Needs.
+[*] [url=https://www.nexusmods.com/witcher3/users/905332]wghost81[/url] for permitting me to use her logic to hold a button to perform a different action. Based on the superb [url=https://www.nexusmods.com/witcher3/mods/365]Friendly HUD[/url].
+[*] [url=https://www.nexusmods.com/witcher3/users/89683013]Aeltoth[/url] for helping me in processing toxicity.
+[*] [url=https://www.nexusmods.com/witcher3/users/56064207]MerseyRockoff[/url] and [url=https://www.nexusmods.com/witcher3/users/92248218]paulr0013[/url] for helping me find help.
+[/list]
