@@ -1,3 +1,7 @@
+<img
+src="https://staticdelivery.nexusmods.com/mods/952/images/7071/7071-1667933108-100058616.jpeg"
+width="50%"/>
+
 # Primal Shallow Water
 
 This is a mod for The Witcher 3: Wild Hunt containing my enhancements for the
@@ -15,6 +19,8 @@ have an older version, please update it first.
 1. Stop the animations for the above actions gracefully.
 1. Purify bottled shallow water to remove toxicity.
 1. [Extra] Drink and bottle ~~shallow~~ water while swimming.
+
+[Showcase video](https://youtu.be/UdBiumzQFvI)
 
 ## Features Explanation
 
@@ -94,7 +100,7 @@ that you cannot eat or drink when under puking effect (intended behaviour) but
 the animations play out the same. The second one is that you can drink shallow
 water even when under puking effect.
 
-So I tried to fix these bugs to increse immersion. Now, if you try to eat or
+So I tried to fix these bugs to increase immersion. Now, if you try to eat or
 drink ("river" water included), Geralt will puke and the relevant message from
 Primal Needs will appear in the game's HUD. The rationale for the puking is
 that Geralt is nauseated when under puking effect, so if he tries to eat or
@@ -135,7 +141,7 @@ To copy the mod files to your game folder, you have basically two options:
 **Manual method**: Extract the contents of the 7z file. Then copy (or cut) the
 `modPrimalShallowWater` folder and paste it into the `mods` folder inside your
 game's folder structure. It should be in the same folder as the
-`modPrimalNeeds` folder. Also, copy (or cut) the `dlcprimalshallowwater` folder
+`modPrimalNeeds` folder. Also, copy (or cut) the `dlcPrimalShallowWater` folder
 and paste it into the `dlc` folder inside your game's folder structure.
 
 **OR**
@@ -152,21 +158,29 @@ Merger](https://www.nexusmods.com/witcher3/mods/484) for this.
 
 You should be presented with the following unsolved conflicts:
 
-* `scripts/game/components/inventoryComponent.ws`: Choose the version from
+* `game/components/inventoryComponent.ws`: Choose the version from
   `modPrimalShallowWater`. It will be in the C panel, probably.
-* `scripts/game/player/playerInput.ws`: Idem.
-* `scripts/local/PNAnimations.ws`: From Script Merger's menus, select
+* `game/player/playerInput.ws`: Idem.
+* `local/PNAnimations.ws`: From Script Merger's menus, select
   **Merge** -> **Choose B for All Unsolved Conflicts**, assuming 
   `modPrimalShallowWater` is being displayed in the B panel. If not, replace
-  "B" with the appropriate letter.
-* `scripts/local/PNData.ws`: Idem.
-* `scripts/local/PNFood.ws`: Idem.
-* `scripts/local/PNThirst.ws`: Idem.
+  "B" with the appropriate letter[^1].
+* `local/PNData.ws`: Idem.
+* `local/PNFood.ws`: Idem.
+* `local/PNThirst.ws`: Idem.
+
+[^1]: This instruction assumes that you have unmodified Primal Needs' scripts.
+If you have a mod that changed them or you have made some change yourself,
+then you should go through each conflict, solving them one by one lest you
+break the relevant mods.
+
+I made a [video-tutorial on how to merge the mod
+files](https://youtu.be/S6ifNODUXo4). You can watch it by clicking on the link.
 
 ## Uninstallation
 
 If you installed manually, remove the `modPrimalShallowWater` folder from your
-`mods` folder and remove the `dlcprimalshallowwater` folder from your `dlc`
+`mods` folder and remove the `dlcPrimalShallowWater` folder from your `dlc`
 folder. Then, run Script Merger to update your merged files.
 
 If you installed with The Witcher 3 Mod Manager, use it to remove the mod and
