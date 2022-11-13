@@ -2,7 +2,7 @@
 
 [center]Enhancements for the shallow water drinking from Primal Needs.[/center]
 
-To use this mod, you [b]must have [url=https://www.nexusmods.com/witcher3/mods/2547]Primal Needs[/url] installed[/b]. This mod was tested with Primal Needs version [b]1.15.1[/b]. If you have an older version, please update it first.
+To use this mod, you [b]must have [url=https://www.nexusmods.com/witcher3/mods/2547]Primal Needs[/url] (or [url=https://www.nexusmods.com/witcher3/mods/4542]AGM Primal Needs[/url]) installed[/b]. This mod was tested with Primal Needs version [b]1.15.1[/b] and AGM Primal Needs version [b]4.1[/b]. If you have an older version, please update it first.
 
 [size=4][color=#E6832B][b]Features Rundown[/b][/color][/size]
 
@@ -79,6 +79,10 @@ To copy the mod files to your game folder, you have basically two options:
 
 After copying the mod files, you [b]must[/b] merge them with other mods, especially with Primal Needs. Use the [url=https://www.nexusmods.com/witcher3/mods/484]Script Merger[/url] for this.
 
+The next steps are a bit different depending on the version you are installing. Follow only the steps in 2.A (regular Primal Needs) or 2.B (AGM Primal Needs).
+
+[color=#E6832B]Part 2.A: Regular Primal Needs version[/color]
+
 You should be presented with the following unsolved conflicts:
 
 [list]
@@ -94,6 +98,20 @@ You should be presented with the following unsolved conflicts:
 I made a video-tutorial on how to merge the mod files. You can watch it below.
 
 [center][youtube]S6ifNODUXo4[/youtube][/center]
+
+[color=#E6832B]Part 2.B: AGM Primal Needs version[/color]
+
+You should be presented with the following unsolved conflicts:
+
+[list]
+[*] [code]game/components/inventoryComponent.ws[/code]: From Script Merger's menus, select [b]Merge[/b] -> [b]Choose C Everywhere[/b], assuming [code]modPrimalShallowWater[/code] is being displayed in the C panel. If not, replace "C" with the appropriate letter*.
+[*] [code]game/player/playerInput.ws[/code]: Choose the version from [code]modPrimalShallowWater[/code]. It will be in the C panel, probably.
+[*] [code]local/PNAnimations.ws[/code]: From Script Merger's menus, select [b]Merge[/b] -> [b]Choose B for All Unsolved Conflicts[/b], assuming [code]modPrimalShallowWater[/code] is being displayed in the B panel. If not, replace "B" with the appropriate letter*.
+[*] [code]local/PNData.ws[/code]: Idem.
+[*] [code]local/PNFood.ws[/code]: Idem.
+[*] [code]local/PNThirst.ws[/code]: Idem.
+[/list]
+* This instruction assumes that you have unmodified AGM Primal Needs' scripts. If you have a mod that changed them or you have made some change yourself, then you should merge the file manually.
 
 [size=4][color=#E6832B][b]Uninstallation[/b][/color][/size]
 
@@ -115,4 +133,6 @@ Standing on the shoulders of these giants:
 [*] [url=https://www.nexusmods.com/witcher3/users/905332]wghost81[/url] for permitting me to use her logic to hold a button to perform a different action. Based on the superb [url=https://www.nexusmods.com/witcher3/mods/365]Friendly HUD[/url].
 [*] [url=https://www.nexusmods.com/witcher3/users/89683013]Aeltoth[/url] for helping me in processing toxicity.
 [*] [url=https://www.nexusmods.com/witcher3/users/56064207]MerseyRockoff[/url] and [url=https://www.nexusmods.com/witcher3/users/92248218]paulr0013[/url] for helping me find help.
+[*] [url=https://www.nexusmods.com/witcher3/users/26045039]AnotherSymbiote[/url] for help with Script Merger.
+[*] [url=https://www.nexusmods.com/witcher3/users/571271]Haldar1248[/url] for the AGM Primal Needs.
 [/list]

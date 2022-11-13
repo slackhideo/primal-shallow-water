@@ -8,9 +8,10 @@ This is a mod for The Witcher 3: Wild Hunt containing my enhancements for the
 shallow water drinking from stefan3372's Primal Needs.
 
 To use this mod, you **must have
-[Primal Needs](https://www.nexusmods.com/witcher3/mods/2547)
-installed**. This mod was tested with Primal Needs version **1.15.1**. If you
-have an older version, please update it first.
+[Primal Needs](https://www.nexusmods.com/witcher3/mods/2547) (or [AGM Primal
+Needs](https://www.nexusmods.com/witcher3/mods/4542)) installed**. This mod was
+tested with Primal Needs version **1.15.1** and AGM Primal Needs version
+**4.1**. If you have an older version, please update it first.
 
 ## Features Rundown
 
@@ -156,6 +157,11 @@ After copying the mod files, you **must** merge them with other mods,
 especially with Primal Needs. Use the [Script
 Merger](https://www.nexusmods.com/witcher3/mods/484) for this.
 
+The next steps are a bit different depending on the version you are installing.
+Follow only the steps in 2.A (regular Primal Needs) or 2.B (AGM Primal Needs).
+
+#### Part 2.A: Regular Primal Needs version
+
 You should be presented with the following unsolved conflicts:
 
 * `game/components/inventoryComponent.ws`: Choose the version from
@@ -176,6 +182,28 @@ break the relevant mods.
 
 I made a [video-tutorial on how to merge the mod
 files](https://youtu.be/S6ifNODUXo4). You can watch it by clicking on the link.
+
+#### Part 2.B: AGM Primal Needs version
+
+You should be presented with the following unsolved conflicts:
+
+* `scripts/game/components/inventoryComponent.ws`: From Script Merger's menus,
+  select **Merge** -> **Choose C Everywhere**, assuming `modPrimalShallowWater`
+  is being displayed in the C panel. If not, replace "C" with the appropriate
+  letter[^2].
+* `scripts/game/player/playerInput.ws`: Choose the version from
+  `modPrimalShallowWater`. It will be in the C panel, probably.
+* `scripts/local/PNAnimations.ws`: From Script Merger's menus, select
+  **Merge** -> **Choose B for All Unsolved Conflicts**, assuming
+  `modPrimalShallowWater` is being displayed in the B panel. If not, replace
+  "B" with the appropriate letter[^2].
+* `scripts/local/PNData.ws`: Idem.
+* `scripts/local/PNFood.ws`: Idem.
+* `scripts/local/PNThirst.ws`: Idem.
+
+[^2]: This instruction assumes that you have unmodified AGM Primal Needs' scripts.
+If you have a mod that changed them or you have made some change yourself,
+then you should merge the file manually.
 
 ## Uninstallation
 
@@ -237,3 +265,7 @@ processing toxicity.
 * [MerseyRockoff](https://www.nexusmods.com/witcher3/users/56064207) and
 [paulr0013](https://www.nexusmods.com/witcher3/users/92248218) for helping me
 find help.
+* [AnotherSymbiote](https://www.nexusmods.com/witcher3/users/26045039) for help
+with Script Merger.
+* [Haldar1248](https://www.nexusmods.com/witcher3/users/571271) for the AGM
+Primal Needs.
