@@ -1,0 +1,10 @@
+;meta[language=en]
+; id      |key(hex)|key(str)| text
+2117071000|        |option_dlc_primalshallowwater|DLC: Primal Shallow Water
+2117071001|        |item_name_polluted_water|Polluted Water
+2117071002|        |item_desc_polluted_water|Water polluted due to dead bodies. It will quench your thirst, but it will also increase toxicity.
+2117071003|        |item_name_canteen_polluted_water|Purified Water (from Polluted Water)
+2117071004|        |item_desc_canteen_polluted_water|Boil some polluted water to purify it. The resulting canteen water will not increase toxicity.
+2117071005|        |psw_anim_stopping|Stopping...
+2117071006|bbcfb9eb|item_name_flask|Canteen Water
+2117071007|877da171|item_desc_flask|Water that has been boiled on a campfire, to be purified. It's stored in Geralt's canteen.
