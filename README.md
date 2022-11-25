@@ -131,6 +131,24 @@ scripts/local/PNThirst.ws
 
 </details>
 
+## Update
+
+The 1.0.1 version is a bugfixed release exclusively for the AGM Primal Needs
+version of this mod.  
+It fixes the issue of canteen water not displaying properly.
+
+To update from version 1.0.0 is simple:
+
+* Step 1: Extract the contents of the 7z file.
+* Step 2: Copy (or cut) the `dlcPrimalShallowWater` folder and paste it into
+  the `dlc` folder inside your game's folder structure, overwriting the previous
+  files.
+* Step 3: Copy (or cut) the `modPrimalShallowWater/content/en.w3strings` file
+  and paste it into the `mods/modPrimalShallowWater/content/` folder inside your
+  game's folder structure, overwriting the previous file.
+* Step 4: ???
+* Step 5: Profit!
+
 ## Installation
 
 I split the installation in two parts. Please, read them carefully.
